@@ -29,19 +29,19 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class usuarioControlador implements Serializable {
 
-    private Empleado empleado;
-
     @Inject
     private EmpleadoFacade empleadoFacade;
-
-    private Tablahorno tablaHorno;
-
-    private Empleado usuarioLog;
 
     @Inject
     private TablahornoFacade tablaHornoFacade;
 
     private List<Empleado> empleados = new ArrayList<>();
+
+    private Empleado empleado;
+
+    private Tablahorno tablaHorno;
+
+    private Empleado usuarioLog;
 
     public usuarioControlador() {
 
@@ -68,7 +68,7 @@ public class usuarioControlador implements Serializable {
             if (autenticacion == false) {
                 facesContext.getExternalContext().redirect("/ProyectoHorno/");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -99,6 +99,7 @@ public class usuarioControlador implements Serializable {
         }
     }
 
+
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -114,7 +115,5 @@ public class usuarioControlador implements Serializable {
     public void setUsuarioLog(Empleado usuarioLog) {
         this.usuarioLog = usuarioLog;
     }
-    
-    
 
 }

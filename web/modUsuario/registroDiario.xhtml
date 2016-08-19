@@ -112,6 +112,14 @@
 
                             <li>
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Reportes </a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#">Flot Charts</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Morris.js Charts</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-edit fa-fw"></i> Registro</a>
@@ -189,7 +197,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Optica Cargadero</label>
-                                                    <input class="form-control" name="opticatacargadero" id="opticacargadero" required="true" type="number"/>                                                   
+                                                    <input class="form-control" name="opticacargadero" id="opticacargadero" required="true" type="number"/>                                                   
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Optica Font Vidrio Emisividad 0.91</label>
@@ -223,6 +231,7 @@
                                                     <label>Gas Flow</label>
                                                     <input class="form-control" name="gasflow" id="gasflow" required="true" type="number"/>                                                   
                                                 </div>
+                                                <h:commandButton action="#{variablesControlador.registrarVariables(usuarioControlador.usuarioLog)}" value="registrar variables"/>
                                             </h:form>
                                         </div>   
                                     </center>

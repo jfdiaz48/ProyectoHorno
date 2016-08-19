@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +20,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -52,18 +53,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tablahorno.findByPresionInternaDerecha", query = "SELECT t FROM Tablahorno t WHERE t.presionInternaDerecha = :presionInternaDerecha"),
     @NamedQuery(name = "Tablahorno.findByPresionInternaIzquierda", query = "SELECT t FROM Tablahorno t WHERE t.presionInternaIzquierda = :presionInternaIzquierda"),
     @NamedQuery(name = "Tablahorno.findByGasFlow", query = "SELECT t FROM Tablahorno t WHERE t.gasFlow = :gasFlow"),
-    @NamedQuery(name = "Tablahorno.findByMaximo", query = "SELECT t FROM Tablahorno t WHERE t.maximo = :maximo"),
-    @NamedQuery(name = "Tablahorno.findByMinimo", query = "SELECT t FROM Tablahorno t WHERE t.minimo = :minimo"),
-    @NamedQuery(name = "Tablahorno.findByPromedio", query = "SELECT t FROM Tablahorno t WHERE t.promedio = :promedio"),
-    @NamedQuery(name = "Tablahorno.findByRango", query = "SELECT t FROM Tablahorno t WHERE t.rango = :rango"),
     @NamedQuery(name = "Tablahorno.findByHoraDeRegistro", query = "SELECT t FROM Tablahorno t WHERE t.horaDeRegistro = :horaDeRegistro"),
     @NamedQuery(name = "Tablahorno.findByFechaDeRegistro", query = "SELECT t FROM Tablahorno t WHERE t.fechaDeRegistro = :fechaDeRegistro")})
 public class Tablahorno implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idTablaHorno")
     private Integer idTablaHorno;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -107,14 +104,6 @@ public class Tablahorno implements Serializable {
     private Double presionInternaIzquierda;
     @Column(name = "GasFlow")
     private Double gasFlow;
-    @Column(name = "Maximo")
-    private Double maximo;
-    @Column(name = "Minimo")
-    private Double minimo;
-    @Column(name = "Promedio")
-    private Double promedio;
-    @Column(name = "Rango")
-    private Double rango;
     @Size(max = 45)
     @Column(name = "horaDeRegistro")
     private String horaDeRegistro;
@@ -298,38 +287,6 @@ public class Tablahorno implements Serializable {
 
     public void setGasFlow(Double gasFlow) {
         this.gasFlow = gasFlow;
-    }
-
-    public Double getMaximo() {
-        return maximo;
-    }
-
-    public void setMaximo(Double maximo) {
-        this.maximo = maximo;
-    }
-
-    public Double getMinimo() {
-        return minimo;
-    }
-
-    public void setMinimo(Double minimo) {
-        this.minimo = minimo;
-    }
-
-    public Double getPromedio() {
-        return promedio;
-    }
-
-    public void setPromedio(Double promedio) {
-        this.promedio = promedio;
-    }
-
-    public Double getRango() {
-        return rango;
-    }
-
-    public void setRango(Double rango) {
-        this.rango = rango;
     }
 
     public String getHoraDeRegistro() {
