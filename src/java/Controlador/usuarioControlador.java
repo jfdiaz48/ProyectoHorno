@@ -46,56 +46,111 @@ public class usuarioControlador implements Serializable {
     public usuarioControlador() {
 
     }
-
-    public void login() throws IOException {
+    
+    public void registrarEmpleado(){
+        
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
         HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        Empleado empleado = new Empleado();
+        try{
+            
+       
+        int idEmpleado = Integer.parseInt((String) params.get("idempleado"));
+        String nombre = (String) params.get("nombre");
+        String apellido = (String) params.get("apellido");
+        String cargo = (String) params.get("cargo");
+        String clave = (String) params.get("clave");
+           
+        empleado.setIdEmpleado(idEmpleado);
+        empleado.setNombre(nombre);
+        empleado.setApellido(apellido);
+        empleado.setCargo(cargo);
+        empleado.setClave(clave);
+        
+        empleadoFacade.create(empleado);
+        
+         }catch(Exception e){
+             
+             e.printStackTrace();
+             
+         }
+    }
+
+    public void login() throws IOException {
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        
         try {
+            
             boolean autenticacion = false;
             int documento = Integer.parseInt((String) params.get("documento"));
             String clave = (String) params.get("clave");
             empleados = empleadoFacade.findAll();
+            
             for (int i = 0; i < empleados.size(); i++) {
                 if (empleados.get(i).getIdEmpleado() == documento && empleados.get(i).getClave().equals(clave)) {
+                    
                     httpServletRequest.getSession().setAttribute("UsuarioLog", empleados.get(i));
                     facesContext.getExternalContext().redirect("/ProyectoHorno/modUsuario/principalUsuario.xhtml");
                     autenticacion = true;
                     usuarioLog = empleados.get(i);
+                    
                 }
             }
+            
             if (autenticacion == false) {
+                
                 facesContext.getExternalContext().redirect("/ProyectoHorno/");
+                
             }
         } catch (Exception e) {
+            
             e.printStackTrace();
+            
         }
     }
 
     public void cerrarSesion() {
+        
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        
         try {
+            
             facesContext.getExternalContext().redirect("/ProyectoHorno/");
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            
         } catch (Exception e) {
+            
             e.printStackTrace();
+            
         }
     }
 
     public void validarSesion() {
+        
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        
         try {
             if (httpServletRequest.getSession().getAttribute("UsuarioLog") != null) {
+                
             } else {
+                
                 facesContext.getExternalContext().redirect("/ProyectoHorno/");
+                
             }
         } catch (Exception e) {
+            
             e.printStackTrace();
+            
         }
     }
 

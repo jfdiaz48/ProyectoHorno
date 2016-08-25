@@ -108,7 +108,7 @@ public class Tablahorno implements Serializable {
     @Column(name = "horaDeRegistro")
     private String horaDeRegistro;
     @Column(name = "fechaDeRegistro")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaDeRegistro;
     @JoinColumn(name = "idEmpleado", referencedColumnName = "idEmpleado")
     @ManyToOne
