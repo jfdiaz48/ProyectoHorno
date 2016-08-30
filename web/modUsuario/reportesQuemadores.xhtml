@@ -152,6 +152,9 @@
 
                                 <div>
                                     <h:form role="form">
+                                        <label style="color:black;" >Fecha:</label>
+                                        <input type="date" class="form-control" name="fecha2"/>
+                                        <h:commandButton action="#{variablesControlador.generarReporte()}"/>
                                         <table class="table table-striped table-hover" data-toggle="table" data-url="data1.json" data-show-toggle="true" data-show-columns="true" data-search="true" data-show-export="true" data-export-types="['xml','sql','doc','excel']" data-height="auto" data-pagination="true">
                                             <thead>
                                                 <tr>
@@ -167,10 +170,9 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input class="form-control" name="toneladas" id="toneladas" required="true" type="number" step="any"/>         </td>
-
-                                                    <td>
-                                                        <input class="form-control" name="temperaturaOptica" id="termoparcorona1" required="true" type="number" step="any"/>         </td>
+                                                        <label></label>
+                                                    </td>
+                                                        
 
                                                     <td>
                                                         <input class="form-control" name="porcentajeo2izquierdo" id="termoparcorona1" required="true" type="number" step="any"/>         </td>

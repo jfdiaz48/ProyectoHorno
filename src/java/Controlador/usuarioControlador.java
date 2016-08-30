@@ -153,6 +153,11 @@ public class usuarioControlador implements Serializable {
             
         }
     }
+    
+    public List<Empleado> listaEmpleados(){
+         empleados = empleadoFacade.findAll();
+         return empleados;
+    }
 
 
     public Empleado getEmpleado() {

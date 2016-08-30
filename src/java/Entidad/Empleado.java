@@ -8,6 +8,7 @@ package Entidad;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empleado.findByNombre", query = "SELECT e FROM Empleado e WHERE e.nombre = :nombre"),
     @NamedQuery(name = "Empleado.findByApellido", query = "SELECT e FROM Empleado e WHERE e.apellido = :apellido"),
     @NamedQuery(name = "Empleado.findByCargo", query = "SELECT e FROM Empleado e WHERE e.cargo = :cargo"),
-    @NamedQuery(name = "Empleado.findByClave", query = "SELECT e FROM Empleado e WHERE e.clave = :clave")})
+    @NamedQuery(name = "Empleado.findByClave", query = "SELECT e FROM Empleado e WHERE e.clave = :clave"),
+    @NamedQuery(name = "Empleado.findByRol", query = "SELECT e FROM Empleado e WHERE e.rol = :rol")})
 public class Empleado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +56,11 @@ public class Empleado implements Serializable {
     @Size(max = 45)
     @Column(name = "clave")
     private String clave;
+    @Size(max = 45)
+    @Column(name = "rol")
+    private String rol;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quemadorEmpleado")
+    private List<Variablesquemador> variablesquemadorList;
     @OneToMany(mappedBy = "idEmpleado")
     private List<Tablahorno> tablahornoList;
 
@@ -102,6 +109,23 @@ public class Empleado implements Serializable {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    @XmlTransient
+    public List<Variablesquemador> getVariablesquemadorList() {
+        return variablesquemadorList;
+    }
+
+    public void setVariablesquemadorList(List<Variablesquemador> variablesquemadorList) {
+        this.variablesquemadorList = variablesquemadorList;
     }
 
     @XmlTransient
