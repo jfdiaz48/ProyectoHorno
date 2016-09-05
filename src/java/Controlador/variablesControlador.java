@@ -49,6 +49,13 @@ public class variablesControlador implements Serializable {
 
     private Variablesquemador variablesQuemador = new Variablesquemador();
 
+    private Variablesquemador variablesQuemadorLog = new Variablesquemador();
+
+    private int estadoTabla1;
+    private int estadoTabla;
+    
+    private List<Variablesquemador> variablesQuemadorRango = new ArrayList<>();
+
     public variablesControlador() {
     }
 
@@ -121,53 +128,57 @@ public class variablesControlador implements Serializable {
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
         HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-
-        numero = Double.parseDouble((String) params.get("toneladas"));
-        numero = numero * 0.0066666666666667;
-        numero = numero * 100;
-        numero = Math.round(numero);
-        Empleado emp = new Empleado();
-        emp = empleadoFacade.find(Integer.parseInt((String) params.get("para")));
-        variablesQuemador.setToneladas(Double.parseDouble((String) params.get("toneladas")));
-        variablesQuemador.setTempOptica(Double.parseDouble((String) params.get("temperaturaOptica")));
-        variablesQuemador.setPorcentajeO2Izquierdo((String) params.get("porcentajeo2izquierdo"));
-        variablesQuemador.setPorcentajeO2Derecho((String) params.get("porcentajeo2derecho"));
-        variablesQuemador.setDioxidoCarbonoIzquierdo((String) params.get("co2izquierdo"));
-        variablesQuemador.setDioxidoCarbonoDerecho((String) params.get("co2derecho"));
-        variablesQuemador.setAreaAnillosIzquierda1(Double.parseDouble((String) params.get("areaAnillos1")));
-        variablesQuemador.setAreaAnillosIzquierda2(Double.parseDouble((String) params.get("areaAnillos2")));
-        variablesQuemador.setAreaAnillosIzquierda3(Double.parseDouble((String) params.get("areaAnillos3")));
-        variablesQuemador.setAreaAnillosIzquierda4(Double.parseDouble((String) params.get("areaAnillos4")));
-        variablesQuemador.setAreaAnillosDerecha1(Double.parseDouble((String) params.get("areaAnillos5")));
-        variablesQuemador.setAreaAnillosDerecha2(Double.parseDouble((String) params.get("areaAnillos6")));
-        variablesQuemador.setAreaAnillosDerecha3(Double.parseDouble((String) params.get("areaAnillos7")));
-        variablesQuemador.setAreaAnillosDerecha4(Double.parseDouble((String) params.get("areaAnillos8")));
-        variablesQuemador.setFlujoIzquierda1(Double.parseDouble((String) params.get("flujo1")));
-        variablesQuemador.setFlujoIzquierda2(Double.parseDouble((String) params.get("flujo2")));
-        variablesQuemador.setFlujoIzquierda3(Double.parseDouble((String) params.get("flujo3")));
-        variablesQuemador.setFlujoIzquierda4(Double.parseDouble((String) params.get("flujo4")));
-        variablesQuemador.setFlujoDerecha1(Double.parseDouble((String) params.get("flujo5")));
-        variablesQuemador.setFlujoDerecha2(Double.parseDouble((String) params.get("flujo6")));
-        variablesQuemador.setFlujoDerecha3(Double.parseDouble((String) params.get("flujo7")));
-        variablesQuemador.setFlujoDerecha4(Double.parseDouble((String) params.get("flujo8")));
-        variablesQuemador.setPresionP1Izquierda1(Double.parseDouble((String) params.get("presionp1psig1")));
-        variablesQuemador.setPresionP1Izquierda2(Double.parseDouble((String) params.get("presionp1psig2")));
-        variablesQuemador.setPresionP1Izquierda3(Double.parseDouble((String) params.get("presionp1psig3")));
-        variablesQuemador.setPresionP1Izquierda4(Double.parseDouble((String) params.get("presionp1psig4")));
-        variablesQuemador.setPresionP1Derecha1(Double.parseDouble((String) params.get("presionp1psig5")));
-        variablesQuemador.setPresionP1Derecha2(Double.parseDouble((String) params.get("presionp1psig6")));
-        variablesQuemador.setPresionP1Derecha3(Double.parseDouble((String) params.get("presionp1psig7")));
-        variablesQuemador.setPresionP1Derecha4(Double.parseDouble((String) params.get("presionp1psig8")));
-        variablesQuemador.setPresionSalidaSkidIzquierda(Double.parseDouble((String) params.get("presionsalidagas1")));
-        variablesQuemador.setPresionSalidaSkidDerecha(Double.parseDouble((String) params.get("presionsalidagas2")));
-        variablesQuemador.setPorcentajeSalidaValvulaIzquierda(Double.parseDouble((String) params.get("salidavalv1")));
-        variablesQuemador.setPorcentajeSalidaValvulaDerecha(Double.parseDouble((String) params.get("salidavalv2")));
-        variablesQuemador.setFlujosGasMscfhIzquierda(Double.parseDouble((String) params.get("flujogas1")));
-        variablesQuemador.setFlujosGasMscfhDerecha(Double.parseDouble((String) params.get("flujogas2")));
-        variablesQuemador.setFechaRegistro(new Date());
-        variablesQuemador.setQuemadorEmpleado(emp);
-        variablesQuemador.setPorcentajeCapacidad("" + numero + " %");
-        variablesQuemadorFacade.create(variablesQuemador);
+        try {
+            numero = Double.parseDouble((String) params.get("toneladas"));
+            numero = numero * 0.0066666666666667;
+            numero = numero * 100;
+            numero = Math.round(numero);
+            Empleado emp = new Empleado();
+            emp = empleadoFacade.find(Integer.parseInt((String) params.get("para")));
+            variablesQuemador.setToneladas(Double.parseDouble((String) params.get("toneladas")));
+            variablesQuemador.setTempOptica(Double.parseDouble((String) params.get("temperaturaOptica")));
+            variablesQuemador.setPorcentajeO2Izquierdo((String) params.get("porcentajeo2izquierdo"));
+            variablesQuemador.setPorcentajeO2Derecho((String) params.get("porcentajeo2derecho"));
+            variablesQuemador.setDioxidoCarbonoIzquierdo((String) params.get("co2izquierdo"));
+            variablesQuemador.setDioxidoCarbonoDerecho((String) params.get("co2derecho"));
+            variablesQuemador.setAreaAnillosIzquierda1(Double.parseDouble((String) params.get("areaAnillos1")));
+            variablesQuemador.setAreaAnillosIzquierda2(Double.parseDouble((String) params.get("areaAnillos2")));
+            variablesQuemador.setAreaAnillosIzquierda3(Double.parseDouble((String) params.get("areaAnillos3")));
+            variablesQuemador.setAreaAnillosIzquierda4(Double.parseDouble((String) params.get("areaAnillos4")));
+            variablesQuemador.setAreaAnillosDerecha1(Double.parseDouble((String) params.get("areaAnillos5")));
+            variablesQuemador.setAreaAnillosDerecha2(Double.parseDouble((String) params.get("areaAnillos6")));
+            variablesQuemador.setAreaAnillosDerecha3(Double.parseDouble((String) params.get("areaAnillos7")));
+            variablesQuemador.setAreaAnillosDerecha4(Double.parseDouble((String) params.get("areaAnillos8")));
+            variablesQuemador.setFlujoIzquierda1(Double.parseDouble((String) params.get("flujo1")));
+            variablesQuemador.setFlujoIzquierda2(Double.parseDouble((String) params.get("flujo2")));
+            variablesQuemador.setFlujoIzquierda3(Double.parseDouble((String) params.get("flujo3")));
+            variablesQuemador.setFlujoIzquierda4(Double.parseDouble((String) params.get("flujo4")));
+            variablesQuemador.setFlujoDerecha1(Double.parseDouble((String) params.get("flujo5")));
+            variablesQuemador.setFlujoDerecha2(Double.parseDouble((String) params.get("flujo6")));
+            variablesQuemador.setFlujoDerecha3(Double.parseDouble((String) params.get("flujo7")));
+            variablesQuemador.setFlujoDerecha4(Double.parseDouble((String) params.get("flujo8")));
+            variablesQuemador.setPresionP1Izquierda1(Double.parseDouble((String) params.get("presionp1psig1")));
+            variablesQuemador.setPresionP1Izquierda2(Double.parseDouble((String) params.get("presionp1psig2")));
+            variablesQuemador.setPresionP1Izquierda3(Double.parseDouble((String) params.get("presionp1psig3")));
+            variablesQuemador.setPresionP1Izquierda4(Double.parseDouble((String) params.get("presionp1psig4")));
+            variablesQuemador.setPresionP1Derecha1(Double.parseDouble((String) params.get("presionp1psig5")));
+            variablesQuemador.setPresionP1Derecha2(Double.parseDouble((String) params.get("presionp1psig6")));
+            variablesQuemador.setPresionP1Derecha3(Double.parseDouble((String) params.get("presionp1psig7")));
+            variablesQuemador.setPresionP1Derecha4(Double.parseDouble((String) params.get("presionp1psig8")));
+            variablesQuemador.setPresionSalidaSkidIzquierda(Double.parseDouble((String) params.get("presionsalidagas1")));
+            variablesQuemador.setPresionSalidaSkidDerecha(Double.parseDouble((String) params.get("presionsalidagas2")));
+            variablesQuemador.setPorcentajeSalidaValvulaIzquierda(Double.parseDouble((String) params.get("salidavalv1")));
+            variablesQuemador.setPorcentajeSalidaValvulaDerecha(Double.parseDouble((String) params.get("salidavalv2")));
+            variablesQuemador.setFlujosGasMscfhIzquierda(Double.parseDouble((String) params.get("flujogas1")));
+            variablesQuemador.setFlujosGasMscfhDerecha(Double.parseDouble((String) params.get("flujogas2")));
+            variablesQuemador.setFechaRegistro(new Date());
+            variablesQuemador.setFechaDeRegistroBuscar(new Date());
+            variablesQuemador.setQuemadorEmpleado(emp);
+            variablesQuemador.setPorcentajeCapacidad("" + numero + " %");
+            variablesQuemadorFacade.create(variablesQuemador);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void generarReporte() throws ParseException {
@@ -175,25 +186,105 @@ public class variablesControlador implements Serializable {
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
         HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        String hora3 = ((String)params.get("fecha2"));
-        
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String hora3 = ((String) params.get("fecha2"));
+
         Date lol = new Date();
-        
+
         Date fechaReporte = new Date();
         fechaReporte = (Date) format.parse(hora3);
-        format.format(fechaReporte);
-        String prueba = "";
-        
-      
-        Variablesquemador variaQuema = (variablesQuemadorFacade.find(18));
-        lol = variaQuema.getFechaRegistro();
-        format.format(lol);
-        if (fechaReporte == lol) {
-            String var = "verdadero";
+        String prueba = "" + fechaReporte.getYear() + fechaReporte.getMonth() + fechaReporte.getDay();
+        List<Variablesquemador> variablesQuemador = new ArrayList<>();
+        variablesQuemador = variablesQuemadorFacade.findAll();
+        for (int i = 0; i < variablesQuemador.size(); i++) {
+
+            String prueba2 = "" + variablesQuemador.get(i).getFechaDeRegistroBuscar().getYear() + variablesQuemador.get(i).getFechaDeRegistroBuscar().getMonth() + variablesQuemador.get(i).getFechaDeRegistroBuscar().getDay();
+
+            if (prueba.equals(prueba2)) {
+                
+                variablesQuemadorLog = variablesQuemador.get(i);
+                estadoTabla = 1;
+
+            }
         }
-      
+
     }
+
+    public void generarReportesEntreFechas() throws ParseException {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaUno = ((String) params.get("fecha1"));
+        String fechaDos = ((String) params.get("fecha2"));
+        
+        //variablesQuemadorRango = null;
+       
+        Date fecha1 = format.parse(fechaUno);
+        Date fecha2 = format.parse(fechaDos);
+        
+        List<Variablesquemador> variablesQuemador = new ArrayList<>();
+        variablesQuemador = variablesQuemadorFacade.findAll();
+        List<Variablesquemador> variablesQuemadorAlmacenar = new ArrayList<>();
+        
+        
+        for (int i = 0; i < variablesQuemador.size(); i++) {
+            if (variablesQuemador.get(i).getFechaDeRegistroBuscar().after(fecha1) && variablesQuemador.get(i).getFechaDeRegistroBuscar().before(fecha2) || variablesQuemador.get(i).getFechaDeRegistroBuscar() == (fecha1) || variablesQuemador.get(i).getFechaDeRegistroBuscar() == (fecha2)) {
+                variablesQuemadorAlmacenar.add(variablesQuemador.get(i));                
+            }
+        }
+        if (variablesQuemadorAlmacenar.size()>1) {
+            variablesQuemadorRango = variablesQuemadorAlmacenar;
+            estadoTabla1 = 1;
+        }else{
+            variablesQuemadorRango = null;
+            estadoTabla1 = 2;
+        }
+    }
+
+    public List<Variablesquemador> todosRegistros() {
+        List<Variablesquemador> registros = new ArrayList<>();
+        registros = variablesQuemadorFacade.findAll();
+        return registros;
+    }
+
+    public List<Variablesquemador> getVariablesQuemadorRango() {
+        return variablesQuemadorRango;
+    }
+
+    public void setVariablesQuemadorRango(List<Variablesquemador> variablesQuemadorRango) {
+        this.variablesQuemadorRango = variablesQuemadorRango;
+    }
+    
+    
+
+    public Variablesquemador getVariablesQuemadorLog() {
+        return variablesQuemadorLog;
+    }
+
+    public void setVariablesQuemadorLog(Variablesquemador variablesQuemadorLog) {
+        this.variablesQuemadorLog = variablesQuemadorLog;
+    }
+
+    public int getEstadoTabla1() {
+        return estadoTabla1;
+    }
+
+    public void setEstadoTabla1(int estadoTabla) {
+        this.estadoTabla1 = estadoTabla;
+    }
+
+    public int getEstadoTabla() {
+        return estadoTabla;
+    }
+
+    public void setEstadoTabla(int estadoTabla) {
+        this.estadoTabla = estadoTabla;
+    }
+    
+    
 
 }

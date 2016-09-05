@@ -71,7 +71,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Variablesquemador.findByFlujosGasMscfhIzquierda", query = "SELECT v FROM Variablesquemador v WHERE v.flujosGasMscfhIzquierda = :flujosGasMscfhIzquierda"),
     @NamedQuery(name = "Variablesquemador.findByFlujosGasMscfhDerecha", query = "SELECT v FROM Variablesquemador v WHERE v.flujosGasMscfhDerecha = :flujosGasMscfhDerecha"),
     @NamedQuery(name = "Variablesquemador.findByComentarios", query = "SELECT v FROM Variablesquemador v WHERE v.comentarios = :comentarios"),
-    @NamedQuery(name = "Variablesquemador.findByFechaRegistro", query = "SELECT v FROM Variablesquemador v WHERE v.fechaRegistro = :fechaRegistro")})
+    @NamedQuery(name = "Variablesquemador.findByFechaRegistro", query = "SELECT v FROM Variablesquemador v WHERE v.fechaRegistro = :fechaRegistro"),
+    @NamedQuery(name = "Variablesquemador.findByFechaDeRegistroBuscar", query = "SELECT v FROM Variablesquemador v WHERE v.fechaDeRegistroBuscar = :fechaDeRegistroBuscar")})
 public class Variablesquemador implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -166,6 +167,9 @@ public class Variablesquemador implements Serializable {
     @Column(name = "fechaRegistro")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaRegistro;
+    @Column(name = "fechaDeRegistroBuscar")
+    @Temporal(TemporalType.DATE)
+    private Date fechaDeRegistroBuscar;
     @JoinColumn(name = "quemadorEmpleado", referencedColumnName = "idEmpleado")
     @ManyToOne(optional = false)
     private Empleado quemadorEmpleado;
@@ -495,6 +499,14 @@ public class Variablesquemador implements Serializable {
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public Date getFechaDeRegistroBuscar() {
+        return fechaDeRegistroBuscar;
+    }
+
+    public void setFechaDeRegistroBuscar(Date fechaDeRegistroBuscar) {
+        this.fechaDeRegistroBuscar = fechaDeRegistroBuscar;
     }
 
     public Empleado getQuemadorEmpleado() {
