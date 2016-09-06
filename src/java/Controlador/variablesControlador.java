@@ -50,6 +50,8 @@ public class variablesControlador implements Serializable {
     private Variablesquemador variablesQuemador = new Variablesquemador();
 
     private Variablesquemador variablesQuemadorLog = new Variablesquemador();
+    
+    private List<Variablesquemador> registros = new ArrayList<>();
 
     private int estadoTabla1;
     private int estadoTabla;
@@ -245,8 +247,7 @@ public class variablesControlador implements Serializable {
         }
     }
 
-    public List<Variablesquemador> todosRegistros() {
-        List<Variablesquemador> registros = new ArrayList<>();
+    public List<Variablesquemador> todosRegistros() {        
         registros = variablesQuemadorFacade.findAll();
         return registros;
     }
@@ -283,6 +284,14 @@ public class variablesControlador implements Serializable {
 
     public void setEstadoTabla(int estadoTabla) {
         this.estadoTabla = estadoTabla;
+    }
+
+    public List<Variablesquemador> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(List<Variablesquemador> registros) {
+        this.registros = registros;
     }
     
     
