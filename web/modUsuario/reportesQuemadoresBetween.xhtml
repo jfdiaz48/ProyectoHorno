@@ -159,174 +159,654 @@
                                         <input type="date" class="form-control" name="fecha2"/>
                                         <h:commandButton action="#{variablesControlador.generarReportesEntreFechas()}"/>
                                         <c:if test="#{variablesControlador.estadoTabla1 == 1}">
-                                            <c:forEach var="items" items="#{variablesControlador.variablesQuemadorRango}">
+                                            <c:forEach var="items" items="#{variablesControlador.variablesQuemadorRango}" varStatus="var">
                                                 <h1>#{items.fechaRegistro}</h1>
                                                 <table class="table table-striped table-hover" data-toggle="table" data-url="data1.json" data-show-toggle="true" data-show-columns="true" data-search="true" data-show-export="true" data-export-types="['xml','sql','doc','excel']" data-height="auto" data-pagination="true">
-                                                    <thead>
-                                                        <tr>
-                                                            <th value="lol">Toneladas</th>
-                                                            <th value="lol">Capacidad de Toneladas</th>
-                                                            <th value="lol">Temperatura Optica</th>   
-                                                            <th>Porcentaje O2 izquierdo</th>
-                                                            <th>Porcentaje O2 Derecho</th>
-                                                            <th>Dioxido de Carbono Izquierdo</th>
-                                                            <th>Dioxido de Carbono Derecho</th>
-                                                            <th>Empleado que registra</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
+                                                <thead>
+                                                    <tr>
+                                                        <th value="lol">Toneladas</th>
+                                                        <th value="lol">Capacidad de Toneladas</th>
+                                                        <th value="lol">Temperatura Optica</th>   
+                                                        <th>Porcentaje O2 izquierdo</th>
+                                                        <th>Porcentaje O2 Derecho</th>
+                                                        <th>Dioxido de Carbono Izquierdo</th>
+                                                        <th>Dioxido de Carbono Derecho</th>
+                                                        <th>Empleado que registra</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.toneladas != variablesControlador.variablesQuemadorRango.get((var.index-1)).toneladas}">
+                                                                <td><label style="color: red">#{items.toneladas}</label></td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.toneladas == variablesControlador.variablesQuemadorRango.get((var.index-1)).toneladas}">
+                                                                <td>
+                                                                    <label>#{items.toneladas}</label>
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
                                                             <td>
                                                                 <label>#{items.toneladas}</label>
-                                                            </td>
+                                                            </td>                                                            
+                                                        </c:if>
 
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeCapacidad != variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeCapacidad}">
+                                                                <td style="color: red">
+                                                                    #{items.porcentajeCapacidad}       
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeCapacidad == variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeCapacidad}">
+                                                                <td>
+                                                                    #{items.porcentajeCapacidad}       
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
 
                                                             <td>
                                                                 #{items.porcentajeCapacidad}       
                                                             </td>
 
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.tempOptica != variablesControlador.variablesQuemadorRango.get((var.index-1)).tempOptica}">
+                                                                <td style="padding-left: 10px; color: red">
+
+                                                                    #{items.tempOptica}</td> 
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.tempOptica == variablesControlador.variablesQuemadorRango.get((var.index-1)).tempOptica}">
+                                                                <td style="padding-left: 10px">
+
+                                                                    #{items.tempOptica}</td> 
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+
                                                             <td style="padding-left: 10px">
 
                                                                 #{items.tempOptica}</td> 
 
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeO2Izquierdo != variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeO2Izquierdo}">
+                                                                <td style="color: red">
+                                                                    #{items.porcentajeO2Izquierdo}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeO2Izquierdo == variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeO2Izquierdo}">
+                                                                <td>
+                                                                    #{items.porcentajeO2Izquierdo}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+
                                                             <td>
                                                                 #{items.porcentajeO2Izquierdo}
                                                             </td>
+
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeO2Derecho != variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeO2Derecho}">
+                                                                <td style="color: red">
+                                                                    #{items.porcentajeO2Derecho}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeO2Derecho == variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeO2Derecho}">
+                                                                <td>
+                                                                    #{items.porcentajeO2Derecho}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+
                                                             <td>
                                                                 #{items.porcentajeO2Derecho}
                                                             </td>
 
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.dioxidoCarbonoIzquierdo != variablesControlador.variablesQuemadorRango.get((var.index-1)).dioxidoCarbonoIzquierdo}">
+                                                                <td style="color: red">
+                                                                    #{items.dioxidoCarbonoIzquierdo}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.dioxidoCarbonoIzquierdo == variablesControlador.variablesQuemadorRango.get((var.index-1)).dioxidoCarbonoIzquierdo}">
+                                                                <td>
+                                                                    #{items.dioxidoCarbonoIzquierdo}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+
                                                             <td>
                                                                 #{items.dioxidoCarbonoIzquierdo}
                                                             </td>
+
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.dioxidoCarbonoDerecho != variablesControlador.variablesQuemadorRango.get((var.index-1)).dioxidoCarbonoDerecho}">
+                                                                <td style="color: red">
+                                                                    #{items.dioxidoCarbonoDerecho}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.dioxidoCarbonoDerecho == variablesControlador.variablesQuemadorRango.get((var.index-1)).dioxidoCarbonoDerecho}">
+                                                                <td>
+                                                                    #{items.dioxidoCarbonoDerecho}
+                                                                </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+
                                                             <td>
                                                                 #{items.dioxidoCarbonoDerecho}
                                                             </td>
-                                                            <td>
-                                                                #{items.quemadorEmpleado.nombre} #{items.quemadorEmpleado.apellido}
-                                                            </td>    
-                                                        </tr>
 
-                                                        <tr>
-                                                            <th>Puertos</th>
-                                                            <th style="padding-left: 25px; padding-top: 10px ">IZQ</th>
-                                                            <th style="padding-left: 30px">Ratio</th>
-                                                            <th style="padding-left: 30px">15</th>
-                                                            <th style="padding-left: 30px">En blanco</th>
-                                                            <th style="padding-left: 30px">DER</th>
-                                                            <th style="padding-left: 30px">Ratio</th>
-                                                            <th style="padding-left: 30px">15</th>
-                                                            <th style="padding-left: 30px">En blanco</th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th style="padding-bottom: 10px">BRT200 ajustes</th>
-                                                            <th style="padding-left: 30px">1</th>
-                                                            <th style="padding-left: 30px">2</th>
-                                                            <th style="padding-left: 30px">3</th>
-                                                            <th style="padding-left: 30px">4</th>
-                                                            <th style="padding-left: 30px">5</th>
-                                                            <th style="padding-left: 30px">6</th>
-                                                            <th style="padding-left: 30px">7</th>
-                                                            <th style="padding-left: 30px">8</th>
-                                                        </tr>
+                                                        </c:if>
 
-                                                        <tr>
-                                                            <td><label style="display: inline-block">Área (anillos) </label></td>                                                                
-                                                            <td>#{variablesControlador.variablesQuemadorLog.areaAnillosIzquierda1}</td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosIzquierda2} </td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosIzquierda3} </td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosIzquierda1} </td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha1}</td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha2}</td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha3}</td>
-                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha4}</td>
-                                                        </tr>
-                                                        <tr style="padding: 10px">
-                                                            <td><label style="display: inline-block">Flujo (anillos) </label></td>                                                                
-                                                            <td style="padding-top: 10 px">#{items.flujoIzquierda1}</td>
-                                                            <td style="padding-left: 10px">#{items.flujoIzquierda2} </td>
-                                                            <td style="padding-left: 10px">#{items.flujoIzquierda3} </td>
-                                                            <td style="padding-left: 10px">#{items.flujoIzquierda4}</td>
-                                                            <td style="padding-left: 10px">#{items.flujoDerecha1}</td>
-                                                            <td style="padding-left: 10px">#{items.flujoDerecha2}</td>
-                                                            <td style="padding-left: 10px">#{items.flujoDerecha3} </td>
-                                                            <td style="padding-left: 10px">#{items.flujoDerecha4}</td>
-                                                        </tr>
-                                                        <tr style="padding: 10px">
-                                                            <td><label style="display: inline-block">Presión P1 psig </label></td>                                                                
-                                                            <td style="padding-top: 10px">#{items.presionP1Izquierda1} </td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Izquierda2}  </td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Izquierda3}  </td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Izquierda4}  </td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Derecha1}  </td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Derecha2}</td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Derecha3}</td>
-                                                            <td style="padding-left: 10px">#{items.presionP1Derecha4}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                            <td>
-                                                                <label> GAS KID </label>
-                                                            </td>
-                                                            <td>
-                                                                <label></label>
-                                                            </td>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                            <td>
-                                                                <label> </label>
-                                                            </td>
-                                                        </tr>
-                                                        <tr style="padding: 10px">
-                                                            <td><label style="display: inline-block">Presión Salida Gas  </label></td>                                                                
-                                                            <td style="padding-top: 10px"></td>
-                                                            <td style="padding-left: 10px">#{items.presionSalidaSkidIzquierda}</td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px">#{items.presionSalidaSkidDerecha}</td>
-                                                            <td style="padding-left: 10px"></td>
-                                                        </tr>
-                                                        <tr style="padding: 10px">
-                                                            <td><label style="display: inline-block">% salida de valv </label></td>                                                                
-                                                            <td style="padding-top: 10px"></td>
-                                                            <td style="padding-left: 10px">#{items.porcentajeSalidaValvulaIzquierda}</td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px">#{items.porcentajeSalidaValvulaDerecha}</td>
-                                                            <td style="padding-left: 10px"></td>
-                                                        </tr>
-                                                        <tr style="padding: 10px">
-                                                            <td><label style="display: inline-block"> Flujo de gas  MSCFH </label></td>                                                                
-                                                            <td style="padding-top: 10px"></td>
-                                                            <td style="padding-left: 10px">#{items.flujosGasMscfhIzquierda}</td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px"></td>
-                                                            <td style="padding-left: 10px">#{items.flujosGasMscfhDerecha}</td>
-                                                            <td style="padding-left: 10px"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                        <td>
+                                                            #{items.quemadorEmpleado.nombre} #{items.quemadorEmpleado.apellido}
+                                                        </td>    
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th>Puertos</th>
+                                                        <th style="padding-left: 25px; padding-top: 10px ">IZQ</th>
+                                                        <th style="padding-left: 30px">Ratio</th>
+                                                        <th style="padding-left: 30px">15</th>
+                                                        <th style="padding-left: 30px">En blanco</th>
+                                                        <th style="padding-left: 30px">DER</th>
+                                                        <th style="padding-left: 30px">Ratio</th>
+                                                        <th style="padding-left: 30px">15</th>
+                                                        <th style="padding-left: 30px">En blanco</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="padding-bottom: 10px">BRT200 ajustes</th>
+                                                        <th style="padding-left: 30px">1</th>
+                                                        <th style="padding-left: 30px">2</th>
+                                                        <th style="padding-left: 30px">3</th>
+                                                        <th style="padding-left: 30px">4</th>
+                                                        <th style="padding-left: 30px">5</th>
+                                                        <th style="padding-left: 30px">6</th>
+                                                        <th style="padding-left: 30px">7</th>
+                                                        <th style="padding-left: 30px">8</th>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><label style="display: inline-block">Área (anillos) </label></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda1 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda1}">
+                                                                <td style="color: red">#{items.areaAnillosIzquierda1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda1 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda1}">
+                                                                <td>#{items.areaAnillosIzquierda1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td>#{items.areaAnillosIzquierda1}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda2 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda2}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosIzquierda2} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda2 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda2}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosIzquierda2} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.areaAnillosIzquierda2} </td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda3 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda3}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosIzquierda3} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda3 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda3}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosIzquierda3} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.areaAnillosIzquierda3} </td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda4 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda4}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosIzquierda4} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosIzquierda4 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosIzquierda4}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosIzquierda4} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.areaAnillosIzquierda4} </td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha1 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha1}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosDerecha1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha1 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha1}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosDerecha1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha1}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha2 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha2}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosDerecha2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha2 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha2}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosDerecha2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha2}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha3 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha3}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosDerecha3}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha3 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha3}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosDerecha2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha3}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha4 != variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha4}">
+                                                                <td style="padding-left: 10px; color: red">#{items.areaAnillosDerecha4}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.areaAnillosDerecha4 == variablesControlador.variablesQuemadorRango.get((var.index-1)).areaAnillosDerecha4}">
+                                                                <td style="padding-left: 10px">#{items.areaAnillosDerecha4}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">
+                                                            <td style="padding-left: 10px">#{items.areaAnillosDerecha4}</td>                                                           
+                                                        </c:if>
+                                                    </tr>
+                                                    <tr style="padding: 10px">
+                                                        <td><label style="display: inline-block">Flujo (anillos) </label></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda1 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda1}">
+                                                                <td style="padding-top: 10 px; color: red">#{items.flujoIzquierda1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda1 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda1}">
+                                                                <td style="padding-top: 10 px">#{items.flujoIzquierda1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10 px">#{items.flujoIzquierda1}</td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda2 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda2}">
+                                                                <td style="padding-top: 10 px; color: red">#{items.flujoIzquierda2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda2 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda2}">
+                                                                <td style="padding-top: 10 px">#{items.flujoIzquierda2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10 px">#{items.flujoIzquierda2}</td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda3 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda3}">
+                                                                <td style="padding-top: 10 px; color: red">#{items.flujoIzquierda3}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda3 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda3}">
+                                                                <td style="padding-top: 10 px">#{items.flujoIzquierda3}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10 px">#{items.flujoIzquierda3}</td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda4 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda4}">
+                                                                <td style="padding-top: 10 px; color: red">#{items.flujoIzquierda4}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoIzquierda4 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoIzquierda4}">
+                                                                <td style="padding-top: 10 px">#{items.flujoIzquierda4}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10 px">#{items.flujoIzquierda4}</td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha1 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha1}">
+                                                                <td style="padding-left: 10px; color: red">#{items.flujoDerecha1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha1 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha1}">
+                                                                <td style="padding-left: 10px">#{items.flujoDerecha1}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                           
+                                                            <td style="padding-left: 10px">#{items.flujoDerecha1}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha2 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha2}">
+                                                                <td style="padding-left: 10px; color: red">#{items.flujoDerecha2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha2 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha2}">
+                                                                <td style="padding-left: 10px">#{items.flujoDerecha2}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                           
+                                                            <td style="padding-left: 10px">#{items.flujoDerecha2}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha3 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha3}">
+                                                                <td style="padding-left: 10px; color: red">#{items.flujoDerecha3}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha3 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha3}">
+                                                                <td style="padding-left: 10px">#{items.flujoDerecha3}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                           
+                                                            <td style="padding-left: 10px">#{items.flujoDerecha3}</td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha4 != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha4}">
+                                                                <td style="padding-left: 10px; color: red">#{items.flujoDerecha4}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujoDerecha4 == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujoDerecha4}">
+                                                                <td style="padding-left: 10px">#{items.flujoDerecha4}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                           
+                                                            <td style="padding-left: 10px">#{items.flujoDerecha4}</td>                                                           
+                                                        </c:if>
+                                                    </tr>
+                                                    <tr style="padding: 10px">
+                                                        <td><label style="display: inline-block">Presión P1 psig </label></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda1 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda1}">
+                                                                <td style="padding-top: 10px; color: red">#{items.presionP1Izquierda1} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda1 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda1}">
+                                                                <td style="padding-top: 10px">#{items.presionP1Izquierda1} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10px">#{items.presionP1Izquierda1} </td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda2 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda2}">
+                                                                <td style="padding-top: 10px; color: red">#{items.presionP1Izquierda2} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda2 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda2}">
+                                                                <td style="padding-top: 10px">#{items.presionP1Izquierda2} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10px">#{items.presionP1Izquierda2} </td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda3 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda3}">
+                                                                <td style="padding-top: 10px; color: red">#{items.presionP1Izquierda3} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda3 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda3}">
+                                                                <td style="padding-top: 10px">#{items.presionP1Izquierda3} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10px">#{items.presionP1Izquierda3} </td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda4 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda4}">
+                                                                <td style="padding-top: 10px; color: red">#{items.presionP1Izquierda4} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Izquierda4 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Izquierda4}">
+                                                                <td style="padding-top: 10px">#{items.presionP1Izquierda4} </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-top: 10px">#{items.presionP1Izquierda4} </td>                                                           
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha1 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha1}">
+                                                                <td style="padding-left: 10px; color: red">#{items.presionP1Derecha1}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha1 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha1}">
+                                                                <td style="padding-left: 10px">#{items.presionP1Derecha1}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.presionP1Derecha1}  </td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha2 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha2}">
+                                                                <td style="padding-left: 10px; color: red">#{items.presionP1Derecha2}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha2 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha2}">
+                                                                <td style="padding-left: 10px">#{items.presionP1Derecha2}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.presionP1Derecha2}  </td>                                                            
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha3 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha3}">
+                                                                <td style="padding-left: 10px; color: red">#{items.presionP1Derecha3}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha3 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha3}">
+                                                                <td style="padding-left: 10px">#{items.presionP1Derecha3}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.presionP1Derecha3}  </td>                                                            
+                                                        </c:if>
+
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha4 != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha4}">
+                                                                <td style="padding-left: 10px; color: red">#{items.presionP1Derecha4}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionP1Derecha4 == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionP1Derecha4}">
+                                                                <td style="padding-left: 10px">#{items.presionP1Derecha4}  </td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.presionP1Derecha4}  </td>                                                            
+                                                        </c:if>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                        <td>
+                                                            <label> GAS KID </label>
+                                                        </td>
+                                                        <td>
+                                                            <label></label>
+                                                        </td>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                        <td>
+                                                            <label> </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="padding: 10px">
+                                                        <td><label style="display: inline-block">Presión Salida Gas  </label></td>                                                                
+                                                        <td style="padding-top: 10px"></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionSalidaSkidIzquierda != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionSalidaSkidIzquierda}">
+                                                                <td style="padding-left: 10px; color: red">#{items.presionSalidaSkidIzquierda}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionSalidaSkidIzquierda == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionSalidaSkidIzquierda}">
+                                                                <td style="padding-left: 10px">#{items.presionSalidaSkidIzquierda}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.presionSalidaSkidIzquierda}</td>                                                            
+                                                        </c:if>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionSalidaSkidDerecha != variablesControlador.variablesQuemadorRango.get((var.index-1)).presionSalidaSkidDerecha}">
+                                                                <td style="padding-left: 10px; color: red">#{items.presionSalidaSkidDerecha}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.presionSalidaSkidDerecha == variablesControlador.variablesQuemadorRango.get((var.index-1)).presionSalidaSkidDerecha}">
+                                                                <td style="padding-left: 10px">#{items.presionSalidaSkidDerecha}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                            <td style="padding-left: 10px">#{items.presionSalidaSkidDerecha}</td>                                                            
+                                                        </c:if>
+                                                        <td style="padding-left: 10px"></td>
+                                                    </tr>
+                                                    <tr style="padding: 10px">
+                                                        <td><label style="display: inline-block">% salida de valv </label></td>                                                                
+                                                        <td style="padding-top: 10px"></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeSalidaValvulaIzquierda != variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeSalidaValvulaIzquierda}">
+                                                                <td style="padding-left: 10px; color: red">#{items.porcentajeSalidaValvulaIzquierda}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeSalidaValvulaIzquierda == variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeSalidaValvulaIzquierda}">
+                                                                <td style="padding-left: 10px">#{items.porcentajeSalidaValvulaIzquierda}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                           
+                                                            <td style="padding-left: 10px">#{items.porcentajeSalidaValvulaIzquierda}</td>                                                            
+                                                        </c:if>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeSalidaValvulaDerecha != variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeSalidaValvulaDerecha}">
+                                                                <td style="padding-left: 10px; color: red">#{items.porcentajeSalidaValvulaDerecha}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.porcentajeSalidaValvulaDerecha == variablesControlador.variablesQuemadorRango.get((var.index-1)).porcentajeSalidaValvulaDerecha}">
+                                                                <td style="padding-left: 10px">#{items.porcentajeSalidaValvulaDerecha}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                           
+                                                            <td style="padding-left: 10px">#{items.porcentajeSalidaValvulaDerecha}</td>                                                            
+                                                        </c:if>
+                                                        <td style="padding-left: 10px"></td>
+                                                    </tr>
+                                                    <tr style="padding: 10px">
+                                                        <td><label style="display: inline-block"> Flujo de gas  MSCFH </label></td>                                                                
+                                                        <td style="padding-top: 10px"></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujosGasMscfhIzquierda != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujosGasMscfhIzquierda}">
+                                                                <td style="padding-left: 10px; color: red">#{items.flujosGasMscfhIzquierda}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujosGasMscfhIzquierda == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujosGasMscfhIzquierda}">
+                                                                <td style="padding-left: 10px">#{items.flujosGasMscfhIzquierda}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                                <td style="padding-left: 10px">#{items.flujosGasMscfhIzquierda}</td>                                                            
+                                                        </c:if>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <td style="padding-left: 10px"></td>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujosGasMscfhDerecha != variablesControlador.variablesQuemadorRango.get((var.index-1)).flujosGasMscfhDerecha}">
+                                                                <td style="padding-left: 10px; color: red">#{items.flujosGasMscfhDerecha}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index >= 1}">
+                                                            <c:if test="#{items.flujosGasMscfhDerecha == variablesControlador.variablesQuemadorRango.get((var.index-1)).flujosGasMscfhDerecha}">
+                                                                <td style="padding-left: 10px">#{items.flujosGasMscfhDerecha}</td>
+                                                            </c:if>
+                                                        </c:if>
+                                                        <c:if test="#{var.index == 0}">                                                            
+                                                                <td style="padding-left: 10px">#{items.flujosGasMscfhDerecha}</td>                                                            
+                                                        </c:if>
+                                                        <td style="padding-left: 10px"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                             </c:forEach>
                                         </c:if>
                                         <c:if test="#{variablesControlador.estadoTabla1 == 2}">
