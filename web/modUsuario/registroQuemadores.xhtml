@@ -115,11 +115,15 @@
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Reportes </a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#">Flot Charts</a>
+                                        <a href="reportesQuemadores.xhtml">Reporte por fecha</a>
                                     </li>
                                     <li>
-                                        <a href="#">Morris.js Charts</a>
+                                        <a href="reportesQuemadoresBetween.xhtml">Reporte entre fechas</a>
                                     </li>
+                                    <li>
+                                        <a href="todosReportesQuemadores.xhtml">Todos los reportes</a>
+                                    </li>
+
                                 </ul>
                             </li>
                             <li>
@@ -287,6 +291,10 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <div class="form-group">
+                                            <label for="comment">Commentario:</label>
+                                            <textarea class="form-control" rows="5" id="commentario" name="comentario"></textarea>
+                                        </div>
                                         <h:commandButton value="registrar" action="#{variablesControlador.registrarVariablesQuemador()}"/>
                                     </h:form>
                                 </div>   

@@ -52,6 +52,8 @@ public class variablesControlador implements Serializable {
     private Variablesquemador variablesQuemadorLog = new Variablesquemador();
     
     private List<Variablesquemador> registros = new ArrayList<>();
+    
+    private Variablesquemador variablesQuemadorModal = new Variablesquemador();
 
     private int estadoTabla1;
     private int estadoTabla;
@@ -177,6 +179,7 @@ public class variablesControlador implements Serializable {
             variablesQuemador.setFechaDeRegistroBuscar(new Date());
             variablesQuemador.setQuemadorEmpleado(emp);
             variablesQuemador.setPorcentajeCapacidad("" + numero + " %");
+            variablesQuemador.setComentarios((String) params.get("comentario"));
             variablesQuemadorFacade.create(variablesQuemador);
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,6 +249,10 @@ public class variablesControlador implements Serializable {
             estadoTabla1 = 2;
         }
     }
+    
+    public void cargarAtributo (Variablesquemador variable){
+        variablesQuemadorModal = variable;
+    } 
 
     public List<Variablesquemador> todosRegistros() {        
         registros = variablesQuemadorFacade.findAll();
@@ -292,6 +299,14 @@ public class variablesControlador implements Serializable {
 
     public void setRegistros(List<Variablesquemador> registros) {
         this.registros = registros;
+    }
+
+    public Variablesquemador getVariablesQuemadorModal() {
+        return variablesQuemadorModal;
+    }
+
+    public void setVariablesQuemadorModal(Variablesquemador variablesQuemadorModal) {
+        this.variablesQuemadorModal = variablesQuemadorModal;
     }
     
     
