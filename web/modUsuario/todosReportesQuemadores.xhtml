@@ -58,11 +58,7 @@
         <title>Index Usuario</title>
     </h:head>
     <h:body>
-        <script>
-            $(function () {
-                $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
-            });
-        </script>
+        
         <div id="wrapper">
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -814,6 +810,9 @@
                                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal#{var.index}" onclick="#{variablesControlador.cargarAtributo(items)}">
                                                     Comentarios
                                                 </button>
+                                                <a href="editarRegistro.xhtml"><button type="button" class="btn btn-primary btn-lg" onclick="#{variablesControlador.cargarAtributoEditar(items)}">
+                                                    Editar
+                                                </button></a>
 
                                             </h:form>
                                             <div class="modal fade" id="myModal#{var.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -833,6 +832,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Large modal -->
+
+
                                         </tr>
                                     </div>   
 

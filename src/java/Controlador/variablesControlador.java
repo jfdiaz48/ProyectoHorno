@@ -51,16 +51,20 @@ public class variablesControlador implements Serializable {
 
     private Variablesquemador variablesQuemadorLog = new Variablesquemador();
     
+    private Variablesquemador variblesQuemadorEditar = new Variablesquemador();
+    
     private List<Variablesquemador> registros = new ArrayList<>();
     
     private Variablesquemador variablesQuemadorModal = new Variablesquemador();
 
     private int estadoTabla1;
+    
     private int estadoTabla;
     
     private List<Variablesquemador> variablesQuemadorRango = new ArrayList<>();
 
     public variablesControlador() {
+       
     }
 
     public void registrarVariables(Empleado em) {
@@ -186,7 +190,7 @@ public class variablesControlador implements Serializable {
         }
     }
 
-    public void generarReporte() throws ParseException {
+    public void generarReporte() throws ParseException {        
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
@@ -237,7 +241,7 @@ public class variablesControlador implements Serializable {
         
         
         for (int i = 0; i < variablesQuemador.size(); i++) {
-            if (variablesQuemador.get(i).getFechaDeRegistroBuscar().after(fecha1) && variablesQuemador.get(i).getFechaDeRegistroBuscar().before(fecha2) || variablesQuemador.get(i).getFechaDeRegistroBuscar() == (fecha1) || variablesQuemador.get(i).getFechaDeRegistroBuscar() == (fecha2)) {
+            if (variablesQuemador.get(i).getFechaDeRegistroBuscar() == (fecha1) || variablesQuemador.get(i).getFechaDeRegistroBuscar() == (fecha2) || variablesQuemador.get(i).getFechaDeRegistroBuscar().after(fecha1) && variablesQuemador.get(i).getFechaDeRegistroBuscar().before(fecha2)) {
                 variablesQuemadorAlmacenar.add(variablesQuemador.get(i));                
             }
         }
@@ -248,6 +252,14 @@ public class variablesControlador implements Serializable {
             variablesQuemadorRango = null;
             estadoTabla1 = 2;
         }
+    }
+    
+    public void editarVariableQuemador(){
+        variablesQuemadorFacade.edit(variblesQuemadorEditar);
+    }
+    
+    public void cargarAtributoEditar(Variablesquemador variable){
+        variblesQuemadorEditar = variable;        
     }
     
     public void cargarAtributo (Variablesquemador variable){
@@ -307,6 +319,14 @@ public class variablesControlador implements Serializable {
 
     public void setVariablesQuemadorModal(Variablesquemador variablesQuemadorModal) {
         this.variablesQuemadorModal = variablesQuemadorModal;
+    }
+
+    public Variablesquemador getVariblesQuemadorEditar() {
+        return variblesQuemadorEditar;
+    }
+
+    public void setVariblesQuemadorEditar(Variablesquemador variblesQuemadorEditar) {
+        this.variblesQuemadorEditar = variblesQuemadorEditar;
     }
     
     
