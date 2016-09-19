@@ -810,9 +810,10 @@
                                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal#{var.index}" onclick="#{variablesControlador.cargarAtributo(items)}">
                                                     Comentarios
                                                 </button>
-                                                <a href="editarRegistro.xhtml"><button type="button" class="btn btn-primary btn-lg" onclick="#{variablesControlador.cargarAtributoEditar(items)}">
+                                                <h:commandLink type="button" class="btn btn-primary btn-lg" action="#{variablesControlador.cargarAtributoEditar(items)}">
                                                     Editar
-                                                </button></a>
+                                                    <f:setPropertyActionListener target="#{variablesControlador.vistaActual}" value="todosReportesQuemadores"/>
+                                                </h:commandLink>
 
                                             </h:form>
                                             <div class="modal fade" id="myModal#{var.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

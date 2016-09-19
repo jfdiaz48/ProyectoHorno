@@ -142,7 +142,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-16">
-                        <h1 class="page-header">Registro diario de variables</h1>
+                        <h1 class="page-header">Editar Registro</h1>
                     </div>
 
                 </div>
@@ -189,7 +189,9 @@
                                                     <td style="padding-left: 10px"><select  id="termoparcorona1" class="selectpicker" name="para" data-live-search="true">
                                                             <option disabled="true" selected="true">#{variablesControlador.variblesQuemadorEditar.quemadorEmpleado.nombre} #{variablesControlador.variblesQuemadorEditar.quemadorEmpleado.apellido}</option>
                                                             <c:forEach var="u" items="#{usuarioControlador.listaEmpleados()}" >
-                                                                <option value="#{u.idEmpleado}">#{u.nombre} #{u.apellido}</option>
+                                                                <c:if test="#{u.idEmpleado != variablesControlador.variblesQuemadorEditar.quemadorEmpleado.idEmpleado}">
+                                                                      <option value="#{u.idEmpleado}">#{u.nombre} #{u.apellido}</option>
+                                                                </c:if>
                                                             </c:forEach>
                                                         </select></td>    
                                                 </tr>
@@ -294,7 +296,16 @@
                                             <label for="comment">Commentario:</label>
                                             <textarea class="form-control" rows="5" id="commentario" name="comentario" value="#{variablesControlador.variblesQuemadorEditar.comentarios}">#{variablesControlador.variblesQuemadorEditar.comentarios}</textarea>
                                         </div>
-                                        <h:commandButton value="editar" action="#{variablesControlador.editarVariableQuemador()}"/>
+                                        <h:commandButton type="button" class="btn btn-primary btn-lg" value="editar" action="#{variablesControlador.editarVariableQuemador()}"/>
+                                        <c:if test="#{variablesControlador.vistaActual == 'todosReportesQuemadores' }">
+                                        <h:commandLink type="button" class="btn btn-primary btn-lg" value="volver" action="todosReportesQuemadores"/>
+                                        </c:if>
+                                        <c:if test="#{variablesControlador.vistaActual == 'reportesQuemadoresBetween'}">
+                                        <h:commandLink type="button" class="btn btn-primary btn-lg" value="volver" action="reportesQuemadoresBetween"/>
+                                        </c:if>
+                                        <c:if test="#{variablesControlador.vistaActual == 'reportesQuemadores'}">
+                                        <h:commandLink type="button" class="btn btn-primary btn-lg" value="volver" action="reportesQuemadores"/>
+                                        </c:if>
                                     </h:form>
                                 </div>   
 
