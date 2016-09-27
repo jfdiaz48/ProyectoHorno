@@ -42,6 +42,10 @@ public class usuarioControlador implements Serializable {
     private Tablahorno tablaHorno;
 
     private Empleado usuarioLog;
+    
+    private Empleado empleadoEdit = new Empleado();
+    
+    private int estadoEdicion;
 
     public usuarioControlador() {
 
@@ -62,12 +66,14 @@ public class usuarioControlador implements Serializable {
         String apellido = (String) params.get("apellido");
         String cargo = (String) params.get("cargo");
         String clave = (String) params.get("clave");
+        String correo = (String) params.get("correo");
            
         empleado.setIdEmpleado(idEmpleado);
         empleado.setNombre(nombre);
         empleado.setApellido(apellido);
         empleado.setCargo(cargo);
         empleado.setClave(clave);
+        empleado.setCorreo(correo);
         
         empleadoFacade.create(empleado);
         
@@ -76,6 +82,42 @@ public class usuarioControlador implements Serializable {
              e.printStackTrace();
              
          }
+    }
+    
+    public void editarEmpleado (){
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        Empleado empleado = new Empleado();
+        try{
+            
+        int idEmpleado = Integer.parseInt((String) params.get("idempleado"));
+        String nombre = (String) params.get("nombre");
+        String apellido = (String) params.get("apellido");
+        String cargo = (String) params.get("cargo");
+        String clave = (String) params.get("clave");
+        String correo = (String) params.get("correo");
+        
+        empleado.setIdEmpleado(idEmpleado);
+        empleado.setNombre(nombre);
+        empleado.setApellido(apellido);
+        empleado.setCargo(cargo);
+        empleado.setClave(clave);
+        empleado.setCorreo(correo);
+        
+            if (empleado == empleadoEdit) {
+                estadoEdicion = 3;
+            }else{
+                empleadoEdit = empleado ;
+                empleadoFacade.edit(empleadoEdit);
+                estadoEdicion = 1;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            estadoEdicion = 2;
+        }
     }
 
     public void login() throws IOException {
@@ -175,5 +217,26 @@ public class usuarioControlador implements Serializable {
     public void setUsuarioLog(Empleado usuarioLog) {
         this.usuarioLog = usuarioLog;
     }
+
+    public Empleado getEmpleadoEdit() {
+        if (estadoEdicion !=0) {
+            estadoEdicion = 0;
+        }
+        return empleadoEdit;
+    }
+
+    public void setEmpleadoEdit(Empleado empleadoEdit) {
+        this.empleadoEdit = empleadoEdit;
+    }
+
+    public int getEstadoEdicion() {
+        return estadoEdicion;
+    }
+
+    public void setEstadoEdicion(int estadoEdicion) {
+        this.estadoEdicion = estadoEdicion;
+    }
+    
+    
 
 }

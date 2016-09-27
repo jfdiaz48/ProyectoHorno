@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
         <meta charset="utf-8"/>
@@ -11,7 +12,7 @@
         <meta name="description" content=""/>
         <meta name="author" content=""/>
 
-        <title>Registrar Empleado</title>
+        <title>Editar Empleado</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../recursos/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
@@ -111,23 +112,20 @@
                                 <a href="#"><i class="fa fa-table fa-fw"></i> Reportes </a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="reportesQuemadores.xhtml">Reporte por fecha</a>
+                                        <a href="../modUsuario/reportesQuemadores.xhtml">Reporte por fecha</a>
                                     </li>
                                     <li>
-                                        <a href="reportesQuemadoresBetween.xhtml">Reporte entre fechas</a>
+                                        <a href="../modUsuario/reportesQuemadoresBetween.xhtml">Reporte entre fechas</a>
                                     </li>
                                     <li>
-                                        <a href="todosReportesQuemadores.xhtml">Todos los reportes</a>
+                                        <a href="../modUsuario/todosReportesQuemadores.xhtml">Todos los reportes</a>
                                     </li>
 
                                 </ul>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-edit fa-fw"></i> Registro de Empleado</a>
+                                <a href="../modUsuario/registroEmpleado.xhtml"><i class="fa fa-edit fa-fw"></i> Registro de Empleado</a>
                             </li>
-
-
-
                         </ul>
                     </div>
 
@@ -138,7 +136,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Registro de Empleado</h1>
+                        <h1 class="page-header">Editar Información de Empleado</h1>
                     </div>
 
                 </div>
@@ -151,32 +149,50 @@
                                 <div class="row">
                                     <center>
                                         <div class="col-lg-15">
+                                            <c:if test="#{usuarioControlador.estadoEdicion == 1}">
+                                                <div class="alert alert-success">
+                                                    Perfil editado correctamente
+                                                </div>
+                                            </c:if>
+                                            <c:if test="#{usuarioControlador.estadoEdicion == 2}">
+                                                <div class="alert alert-danger">
+                                                    Ocurrio un error al editar, intentelo nuevamente
+                                                </div>
+                                            </c:if>
+                                            <c:if test="#{usuarioControlador.estadoEdicion == 3}">
+                                                <div class="alert alert-warning">
+                                                    No se editó ningun campo
+                                                </div>
+                                            </c:if>
                                             <h:form role="form">
                                                 <div class="form-group">
                                                     <label>Documento del empleado</label>
-                                                    <input class="form-control" name="idempleado" id="idempleado" required="true" type="text"/>                                                   
+                                                    <input class="form-control" name="idempleado" id="idempleado" value="#{usuarioControlador.empleadoEdit.idEmpleado}" required="true" type="text"/>                                                   
                                                 </div>    
                                                 <div class="form-group">
                                                     <label>Nombres del Empleado</label>
-                                                    <input class="form-control" name="nombre" id="nombre" required="true" type="text"/>                                                   
+                                                    <input class="form-control" name="nombre" id="nombre" value="#{usuarioControlador.empleadoEdit.nombre}" required="true" type="text"/>                                                   
                                                 </div> 
                                                 <div class="form-group">
                                                     <label>Apellios del Empleado</label>
-                                                    <input class="form-control" name="apellido" id="apellido" required="cargo" type="text"/>                                                   
+                                                    <input class="form-control" name="apellido" id="apellido" value="#{usuarioControlador.empleadoEdit.apellido}" required="cargo" type="text"/>                                                   
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Cargo del empleado</label>
-                                                    <input class="form-control" name="cargo" id="cargo" required="true" type="text"/>                                                   
+                                                    <input class="form-control" name="cargo" id="cargo" value="#{usuarioControlador.empleadoEdit.cargo}" required="true" type="text"/>                                                   
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Contraseña</label>
-                                                    <input class="form-control" name="clave" id="clave" required="clave" type="password"/>                                                   
+                                                    <input class="form-control" name="clave" id="clave" value="#{usuarioControlador.empleadoEdit.clave}" required="clave" type="text"/>                                                   
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Correo electrónico</label>
-                                                    <input class="form-control" name="correo" id="correo" required="clave" type="password"/>                                                   
+                                                    <input class="form-control" name="correo" id="correo" value="#{usuarioControlador.empleadoEdit.correo}" required="clave" type="text"/>                                                   
                                                 </div>
-                                                <h:commandButton action="#{usuarioControlador.registrarEmpleado()}" value="Registrar Empleado"/>
+                                                <h:commandButton class="btn btn-primary btn-lg" action="#{usuarioControlador.editarEmpleado()}" value="Editar Empleado"/>
+                                                <h:commandLink type="button" class="btn btn-primary btn-lg" action="miPerfil.xhtml">
+                                                    Volver                                                    
+                                                </h:commandLink>
                                             </h:form>
                                         </div>   
                                     </center>

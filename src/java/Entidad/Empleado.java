@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Empleado.findByApellido", query = "SELECT e FROM Empleado e WHERE e.apellido = :apellido"),
     @NamedQuery(name = "Empleado.findByCargo", query = "SELECT e FROM Empleado e WHERE e.cargo = :cargo"),
     @NamedQuery(name = "Empleado.findByClave", query = "SELECT e FROM Empleado e WHERE e.clave = :clave"),
-    @NamedQuery(name = "Empleado.findByRol", query = "SELECT e FROM Empleado e WHERE e.rol = :rol")})
+    @NamedQuery(name = "Empleado.findByRol", query = "SELECT e FROM Empleado e WHERE e.rol = :rol"),
+    @NamedQuery(name = "Empleado.findByCorreo", query = "SELECT e FROM Empleado e WHERE e.correo = :correo")})
 public class Empleado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,6 +60,9 @@ public class Empleado implements Serializable {
     @Size(max = 45)
     @Column(name = "rol")
     private String rol;
+    @Size(max = 45)
+    @Column(name = "correo")
+    private String correo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quemadorEmpleado")
     private List<Variablesquemador> variablesquemadorList;
     @OneToMany(mappedBy = "idEmpleado")
@@ -117,6 +121,14 @@ public class Empleado implements Serializable {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     @XmlTransient

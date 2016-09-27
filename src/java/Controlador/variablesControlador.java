@@ -57,12 +57,12 @@ public class variablesControlador implements Serializable {
 
     private Variablesquemador variablesQuemadorModal = new Variablesquemador();
 
-    private int estadoTabla1;
+    private int estadoTabla1, estadoEdicion;
 
     private int estadoTabla;
 
     private List<Variablesquemador> variablesQuemadorRango = new ArrayList<>();
-    
+
     private String vistaActual;
 
     public variablesControlador() {
@@ -233,27 +233,31 @@ public class variablesControlador implements Serializable {
         String fechaDos = ((String) params.get("fecha2"));
 
         //variablesQuemadorRango = null;
-        Date fecha1 = format.parse(fechaUno);
-        Date fecha2 = format.parse(fechaDos);
+        try {
+            Date fecha1 = format.parse(fechaUno);
+            Date fecha2 = format.parse(fechaDos);
 
-        List<Variablesquemador> variablesQuemador = new ArrayList<>();
-        variablesQuemador = variablesQuemadorFacade.findAll();
-        List<Variablesquemador> variablesQuemadorAlmacenar = new ArrayList<>();
+            List<Variablesquemador> variablesQuemador = new ArrayList<>();
+            variablesQuemador = variablesQuemadorFacade.findAll();
+            List<Variablesquemador> variablesQuemadorAlmacenar = new ArrayList<>();
 
-        for (int i = 0; i < variablesQuemador.size(); i++) {
-            if (variablesQuemador.get(i).getFechaDeRegistroBuscar().equals(fecha1) || variablesQuemador.get(i).getFechaDeRegistroBuscar().equals(fecha2)) {
-                variablesQuemadorAlmacenar.add(variablesQuemador.get(i));
+            for (int i = 0; i < variablesQuemador.size(); i++) {
+                if (variablesQuemador.get(i).getFechaDeRegistroBuscar().equals(fecha1) || variablesQuemador.get(i).getFechaDeRegistroBuscar().equals(fecha2)) {
+                    variablesQuemadorAlmacenar.add(variablesQuemador.get(i));
+                }
+                if (variablesQuemador.get(i).getFechaDeRegistroBuscar().after(fecha1) && variablesQuemador.get(i).getFechaDeRegistroBuscar().before(fecha2)) {
+                    variablesQuemadorAlmacenar.add(variablesQuemador.get(i));
+                }
             }
-            if (variablesQuemador.get(i).getFechaDeRegistroBuscar().after(fecha1) && variablesQuemador.get(i).getFechaDeRegistroBuscar().before(fecha2)) {
-                variablesQuemadorAlmacenar.add(variablesQuemador.get(i));
+            if (variablesQuemadorAlmacenar.size() >= 1) {
+                variablesQuemadorRango = variablesQuemadorAlmacenar;
+                estadoTabla1 = 1;
+            } else {
+                variablesQuemadorRango = null;
+                estadoTabla1 = 2;
             }
-        }
-        if (variablesQuemadorAlmacenar.size() >= 1) {
-            variablesQuemadorRango = variablesQuemadorAlmacenar;
-            estadoTabla1 = 1;
-        } else {
-            variablesQuemadorRango = null;
-            estadoTabla1 = 2;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -318,14 +322,22 @@ public class variablesControlador implements Serializable {
             }
             variblesQuemadorEditar.setPorcentajeCapacidad("" + numero + " %");
             variblesQuemadorEditar.setComentarios((String) params.get("comentario"));
+            if (variablesQuemadorFacade.find(variblesQuemadorEditar.getIdVariable()) == variblesQuemadorEditar) {
+                estadoEdicion = 3;
+            }else{
             variablesQuemadorFacade.edit(variblesQuemadorEditar);
+            estadoEdicion = 1;}
         } catch (Exception e) {
             e.printStackTrace();
+            estadoEdicion = 2;
         }
     }
 
     public String cargarAtributoEditar(Variablesquemador variable) {
         variblesQuemadorEditar = variable;
+        if (estadoEdicion != 0) {
+            estadoEdicion = 0;
+        }
         return "editarRegistro.xhtml";
     }
 
@@ -401,7 +413,13 @@ public class variablesControlador implements Serializable {
     public void setVistaActual(String vistaActual) {
         this.vistaActual = vistaActual;
     }
-    
-    
+
+    public int getEstadoEdicion() {
+        return estadoEdicion;
+    }
+
+    public void setEstadoEdicion(int estadoEdicion) {
+        this.estadoEdicion = estadoEdicion;
+    }
 
 }
