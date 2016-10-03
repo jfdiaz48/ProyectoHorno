@@ -107,7 +107,7 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
+                                <a href="registroQuemadores.xhtml"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
                             </li>
 
                             <li>
@@ -812,7 +812,6 @@
                                                     Editar
                                                     <f:setPropertyActionListener target="#{variablesControlador.vistaActual}" value="todosReportesQuemadores"/>
                                                 </h:commandLink>
-
                                             </h:form>
                                             <div class="modal fade" id="myModal#{var.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                 <div class="modal-dialog" role="document">
@@ -854,10 +853,7 @@
         <!-- Metis Menu Plugin JavaScript -->
         <script src="../recursos/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="../recursos/bower_components/raphael/raphael-min.js"></script>
-        <script src="../recursos/bower_components/morrisjs/morris.min.js"></script>
-        <script src="../recursos/js/morris-data.js"></script>
+       
 
         <!-- Custom Theme JavaScript -->
         <script src="../recursos/dist/js/sb-admin-2.js"></script>

@@ -106,7 +106,7 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
+                                <a href="registroQuemadores.xhtml"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
                             </li>
 
                             <li>
@@ -309,7 +309,7 @@
                                             <label for="comment">Commentario:</label>
                                             <textarea class="form-control" rows="5" id="commentario" name="comentario" value="#{variablesControlador.variblesQuemadorEditar.comentarios}">#{variablesControlador.variblesQuemadorEditar.comentarios}</textarea>
                                         </div>
-                                        <h:commandButton class="btn btn-primary btn-lg" value="Editar" action="#{variablesControlador.editarVariableQuemador()}"/>
+                                        <h:commandButton class="btn btn-primary btn-lg" value="Editar" onclick="return confirm('¿Está seguro de editar?')" action="#{variablesControlador.editarVariableQuemador()}"/>
                                         <c:if test="#{variablesControlador.vistaActual == 'todosReportesQuemadores' }">
                                             <h:commandLink type="button" class="btn btn-primary btn-lg" value="volver" action="todosReportesQuemadores"/>
                                         </c:if>
@@ -338,10 +338,6 @@
         <!-- Metis Menu Plugin JavaScript -->
         <script src="../recursos/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="../recursos/bower_components/raphael/raphael-min.js"></script>
-        <script src="../recursos/bower_components/morrisjs/morris.min.js"></script>
-        <script src="../recursos/js/morris-data.js"></script>
 
         <!-- Custom Theme JavaScript -->
         <script src="../recursos/dist/js/sb-admin-2.js"></script>
