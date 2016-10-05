@@ -105,7 +105,7 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
+                                <a href="../modUsuario/registroQuemadores.xhtml"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
                             </li>
 
                             <li>
@@ -167,7 +167,7 @@
                                             <h:form role="form">
                                                 <div class="form-group">
                                                     <label>Documento del empleado</label>
-                                                    <input class="form-control" name="idempleado" id="idempleado" value="#{usuarioControlador.empleadoEdit.idEmpleado}" required="true" type="text"/>                                                   
+                                                    <input class="form-control" name="idempleado" id="idempleado" value="#{usuarioControlador.empleadoEdit.idEmpleado}" required="true" type="text" disabled="true"/>                                                   
                                                 </div>    
                                                 <div class="form-group">
                                                     <label>Nombres del Empleado</label>
@@ -189,7 +189,7 @@
                                                     <label>Correo electrónico</label>
                                                     <input class="form-control" name="correo" id="correo" value="#{usuarioControlador.empleadoEdit.correo}" required="clave" type="text"/>                                                   
                                                 </div>
-                                                <h:commandButton class="btn btn-primary btn-lg" action="#{usuarioControlador.editarEmpleado()}" value="Editar Empleado"/>
+                                                <h:commandButton class="btn btn-primary btn-lg" action="#{usuarioControlador.editarEmpleado()}" onclick="return confirm('¿Está seguro de editar?')" value="Editar Empleado"/>
                                                 <h:commandLink type="button" class="btn btn-primary btn-lg" action="miPerfil.xhtml">
                                                     Volver                                                    
                                                 </h:commandLink>
@@ -211,11 +211,6 @@
 
         <!-- Metis Menu Plugin JavaScript -->
         <script src="../recursos/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-        <!-- Morris Charts JavaScript -->
-        <script src="../recursos/bower_components/raphael/raphael-min.js"></script>
-        <script src="../recursos/bower_components/morrisjs/morris.min.js"></script>
-        <script src="../recursos/js/morris-data.js"></script>
 
         <!-- Custom Theme JavaScript -->
         <script src="../recursos/dist/js/sb-admin-2.js"></script>

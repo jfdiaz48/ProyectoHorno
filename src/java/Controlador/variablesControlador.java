@@ -8,6 +8,7 @@ package Controlador;
 import Entidad.Empleado;
 import Entidad.*;
 import Modelo.*;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -64,6 +65,10 @@ public class variablesControlador implements Serializable {
     private List<Variablesquemador> variablesQuemadorRango = new ArrayList<>();
 
     private String vistaActual;
+
+    private int estadoRegistro;
+
+    private int estadoRegistro2;
 
     public variablesControlador() {
 
@@ -187,9 +192,26 @@ public class variablesControlador implements Serializable {
             variablesQuemador.setPorcentajeCapacidad("" + numero + " %");
             variablesQuemador.setComentarios((String) params.get("comentario"));
             variablesQuemadorFacade.create(variablesQuemador);
+            if (estadoRegistro2 == 0) {
+                estadoRegistro = 1;
+                estadoRegistro2 = 1;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
+            if (estadoRegistro2 == 0) {
+                estadoRegistro = 2;
+                estadoRegistro2 = 1;
+            }
         }
+    }
+
+    public void validacionEstadoRegistro() throws IOException {
+
+        if (estadoRegistro2 == 1) {
+            estadoRegistro = 0;
+        }
+
     }
 
     public void generarReporte() throws ParseException {
@@ -200,8 +222,6 @@ public class variablesControlador implements Serializable {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String hora3 = ((String) params.get("fecha2"));
-
-        Date lol = new Date();
 
         Date fechaReporte = new Date();
         fechaReporte = (Date) format.parse(hora3);
@@ -324,9 +344,10 @@ public class variablesControlador implements Serializable {
             variblesQuemadorEditar.setComentarios((String) params.get("comentario"));
             if (variablesQuemadorFacade.find(variblesQuemadorEditar.getIdVariable()) == variblesQuemadorEditar) {
                 estadoEdicion = 3;
-            }else{
-            variablesQuemadorFacade.edit(variblesQuemadorEditar);
-            estadoEdicion = 1;}
+            } else {
+                variablesQuemadorFacade.edit(variblesQuemadorEditar);
+                estadoEdicion = 1;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             estadoEdicion = 2;
@@ -420,6 +441,22 @@ public class variablesControlador implements Serializable {
 
     public void setEstadoEdicion(int estadoEdicion) {
         this.estadoEdicion = estadoEdicion;
+    }
+
+    public int getEstadoRegistro() {
+        return estadoRegistro;
+    }
+
+    public void setEstadoRegistro(int estadoRegistro) {
+        this.estadoRegistro = estadoRegistro;
+    }
+
+    public int getEstadoRegistro2() {
+        return estadoRegistro2;
+    }
+
+    public void setEstadoRegistro2(int estadoRegistro2) {
+        this.estadoRegistro2 = estadoRegistro2;
     }
 
 }

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
         <meta charset="utf-8"/>
@@ -32,6 +33,7 @@
         <link href="../recursos/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
         <f:event type="preRenderView" listener="#{usuarioControlador.validarSesion()}"/>
+        <f:event type="preRenderView" listener="#{usuarioControlador.validacionEstadoRegistro()}"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <!-- or use local jquery -->
 
@@ -104,7 +106,7 @@
                                 <!-- /input-group -->
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
+                                <a href="registroQuemadores.xhtml"><i class="fa fa-dashboard fa-fw"></i> Registro diario de variables</a>
                             </li>
 
                             <li>
@@ -151,6 +153,17 @@
                                 <div class="row">
                                     <center>
                                         <div class="col-lg-15">
+                                            <c:if test="#{usuarioControlador.estadoRegistro == 1}">
+                                                <div class="alert alert-success">
+                                                    Registro insertado correctamente.
+                                                </div>
+                                            </c:if>
+                                            <c:if test="#{usuarioControlador.estadoRegistro == 2}">
+                                                <div class="alert alert-danger">
+                                                    Ocurrio un error al registrar, intentelo nuevamente.
+                                                </div>
+                                            </c:if>
+                                            
                                             <h:form role="form">
                                                 <div class="form-group">
                                                     <label>Documento del empleado</label>
@@ -176,7 +189,7 @@
                                                     <label>Correo electrónico</label>
                                                     <input class="form-control" name="correo" id="correo" required="clave" type="password"/>                                                   
                                                 </div>
-                                                <h:commandButton action="#{usuarioControlador.registrarEmpleado()}" value="Registrar Empleado"/>
+                                                <h:commandButton class="btn btn-primary btn-lg" action="#{usuarioControlador.registrarEmpleado()}" onclick="return confirm('¿Está seguro de registar éste empleado?')" value="Registrar Empleado"/>
                                             </h:form>
                                         </div>   
                                     </center>
@@ -196,10 +209,7 @@
         <!-- Metis Menu Plugin JavaScript -->
         <script src="../recursos/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="../recursos/bower_components/raphael/raphael-min.js"></script>
-        <script src="../recursos/bower_components/morrisjs/morris.min.js"></script>
-        <script src="../recursos/js/morris-data.js"></script>
+       
 
         <!-- Custom Theme JavaScript -->
         <script src="../recursos/dist/js/sb-admin-2.js"></script>
